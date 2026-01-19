@@ -12,6 +12,10 @@ const router = createRouter({
 });
 
 app.use(router);
-app.use(ui);
+app.use(ui, {
+  colorMode: {
+    preference: "light"
+  }
+});
 
 app.mount("#app");
