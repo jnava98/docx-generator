@@ -120,4 +120,5 @@ export function validateConstructionForm(form: ConstructionForm) {
     originalArea: form.originalBatch.area,
     resultBatches: form.resultBatches,
   });
+  
 }

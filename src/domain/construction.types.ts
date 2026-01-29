@@ -16,6 +16,7 @@ export interface Batch {
 export interface ConstructionForm {
   folium: string;
   date: Date;
+  owner: string;
   originalBatch: Batch;
   batchesNumber: number;
   resultBatches: Batch[];

@@ -46,6 +46,14 @@ function paragraphPatch(text = ""): ParagraphPatch {
   };
 }
 
+function formatDate(date: Date): string {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const day = date.getDay()
+  
+  return `${day} DE ${month} DE ${year}`.toUpperCase()
+}
+
 /**
  * En el template hay placeholders con typo `]`
  * Ej: {{original_batch_north_meters]}
@@ -115,6 +123,12 @@ export function buildSubdivisionTemplatePatches(
 
   // Generales
   patches["folium"] = paragraphPatch(form.folium ?? "");
+  
+  patches["formatted_date"] = paragraphPatch(
+    formatDate(form.date ?? new Date())
+  )
+  
+  patches["owner"] = paragraphPatch(form.owner.toUpperCase() ?? "");
 
   // Original
   patches["original_batch_address"] = paragraphPatch(
