@@ -1,5 +1,5 @@
 import type { ConstructionForm, Batch } from "../domain/construction.types";
-import { patchDocument, PatchType, Paragraph, TextRun } from "docx";
+import { patchDocument, PatchType, Paragraph, TextRun, UnderlineType } from "docx";
 import { validateConstructionForm } from "../domain/construction";
 
 /* ------------------------------------------------ */
@@ -89,23 +89,34 @@ function setPatchWithBracketVariants(
 
 function buildBatchBlock(batch: Batch): Paragraph[] {
   return [
-    // Dirección
-    p(`${batch.address}`),
-    p(""),
+    // Dirección (negrita + subrayado)
+    new Paragraph({
+      children: [
+        new TextRun({
+          text: batch.address,
+          bold: true,
+          underline: { type: UnderlineType.SINGLE },
+        }),
+      ],
+    }),
+
+    new Paragraph(""),
 
     // Colindancias
-    p(`Norte: ${fmt(batch.northData?.meters)} mts. Con ${batch.northData?.text || ""}`),
-    p(`Sur: ${fmt(batch.southData?.meters)} mts. Con ${batch.southData?.text || ""}`),
-    p(`Este: ${fmt(batch.eastData?.meters)} mts. Con ${batch.eastData?.text || ""}`),
-    p(`Oeste: ${fmt(batch.westData?.meters)} mts. Con ${batch.westData?.text || ""}`),
-    p(""),
+    new Paragraph(`Norte: ${fmt(batch.northData?.meters)} mts. Con ${batch.northData?.text || ""}`),
+    new Paragraph(`Sur: ${fmt(batch.southData?.meters)} mts. Con ${batch.southData?.text || ""}`),
+    new Paragraph(`Este: ${fmt(batch.eastData?.meters)} mts. Con ${batch.eastData?.text || ""}`),
+    new Paragraph(`Oeste: ${fmt(batch.westData?.meters)} mts. Con ${batch.westData?.text || ""}`),
+
+    new Paragraph(""),
 
     // Superficie
-    p(`Superficie: ${fmt(batch.area)} m2`),
+    new Paragraph(`Superficie: ${fmt(batch.area)} m2`),
 
     // Clave
-    p(`Clave Catastral: ${batch.catastralKey}`),
-    p(""),
+    new Paragraph(`Clave Catastral: ${batch.catastralKey}`),
+
+    new Paragraph(""),
   ];
 }
 
