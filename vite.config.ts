@@ -8,4 +8,5 @@ export default defineConfig({
        // 📌 configuración de tema / color mode 🔥
        colorMode: false
      }),],
+   publicDir: "public",
 });
