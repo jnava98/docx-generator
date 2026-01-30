@@ -47,11 +47,26 @@ function paragraphPatch(text = ""): ParagraphPatch {
 }
 
 function formatDate(date: Date): string {
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDay()
-  
-  return `${day} DE ${month} DE ${year}`.toUpperCase()
+  const months = [
+    "ENERO",
+    "FEBRERO",
+    "MARZO",
+    "ABRIL",
+    "MAYO",
+    "JUNIO",
+    "JULIO",
+    "AGOSTO",
+    "SEPTIEMBRE",
+    "OCTUBRE",
+    "NOVIEMBRE",
+    "DICIEMBRE",
+  ];
+
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${day} DE ${month} DE ${year}`;
 }
 
 /**
@@ -123,11 +138,11 @@ export function buildSubdivisionTemplatePatches(
 
   // Generales
   patches["folium"] = paragraphPatch(form.folium ?? "");
-  
+
   patches["formatted_date"] = paragraphPatch(
     formatDate(form.date ?? new Date())
   )
-  
+
   patches["owner"] = paragraphPatch(form.owner.toUpperCase() ?? "");
 
   // Original
