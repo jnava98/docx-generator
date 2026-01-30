@@ -103,10 +103,58 @@ function buildBatchBlock(batch: Batch): Paragraph[] {
     new Paragraph(""),
 
     // Colindancias
-    new Paragraph(`Norte: ${fmt(batch.northData?.meters)} mts. Con ${batch.northData?.text || ""}`),
-    new Paragraph(`Sur: ${fmt(batch.southData?.meters)} mts. Con ${batch.southData?.text || ""}`),
-    new Paragraph(`Este: ${fmt(batch.eastData?.meters)} mts. Con ${batch.eastData?.text || ""}`),
-    new Paragraph(`Oeste: ${fmt(batch.westData?.meters)} mts. Con ${batch.westData?.text || ""}`),
+    new Paragraph({
+      children: [
+        new TextRun({
+          text: "Norte:",
+          bold: true,
+          underline: { type: UnderlineType.SINGLE },
+        }),
+        new TextRun({
+          text: ` mts. Con ${batch.northData?.text || ""}`,
+        }),
+      ],
+    }),
+    new Paragraph({
+      children: [
+        new TextRun({
+          text: "Sur:",
+          bold: true,
+          underline: { type: UnderlineType.SINGLE },
+        }),
+        new TextRun({
+          text: ` mts. Con ${batch.southData?.text || ""}`,
+        }),
+      ],
+    }),
+    new Paragraph({
+      children: [
+        new TextRun({
+          text: "Este:",
+          bold: true,
+          underline: { type: UnderlineType.SINGLE },
+        }),
+        new TextRun({
+          text: ` mts. Con ${batch.eastData?.text || ""}`,
+        }),
+      ],
+    }),
+    new Paragraph({
+      children: [
+        new TextRun({
+          text: "Oeste:",
+          bold: true,
+          underline: { type: UnderlineType.SINGLE },
+        }),
+        new TextRun({
+          text: ` mts. Con ${batch.westData?.text || ""}`,
+        }),
+      ],
+    }),
+    // new Paragraph(`Norte: ${fmt(batch.northData?.meters)} mts. Con ${batch.northData?.text || ""}`),
+    // new Paragraph(`Sur: ${fmt(batch.southData?.meters)} mts. Con ${batch.southData?.text || ""}`),
+    // new Paragraph(`Este: ${fmt(batch.eastData?.meters)} mts. Con ${batch.eastData?.text || ""}`),
+    // new Paragraph(`Oeste: ${fmt(batch.westData?.meters)} mts. Con ${batch.westData?.text || ""}`),
 
     new Paragraph(""),
 
@@ -158,7 +206,7 @@ export function buildSubdivisionTemplatePatches(
 
   // Original
   patches["original_batch_address"] = paragraphPatch(
-    form.originalBatch.address ?? ""
+    form.originalBatch.address.toUpperCase() ?? ""
   );
 
   setPatchWithBracketVariants(
