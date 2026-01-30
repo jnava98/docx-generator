@@ -183,6 +183,9 @@
               <UFormField label="Área (m²)" class="w-40" required :error="errors[`resultBatches.${i}.area`]">
                 <UInput v-model.number="form.resultBatches[i]!.area" type="number" min="0" step="1" />
               </UFormField>
+              <UFormField label="Dirección" class="w-40" required :error="errors[`resultBatches.${i}.address`]">
+                <UInput v-model="form.resultBatches[i]!.address" type="text" />
+              </UFormField>
             </div>
 
 
